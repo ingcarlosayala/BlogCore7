@@ -1,0 +1,64 @@
+﻿@model BlogCore.Models.Slider
+@{
+    ViewData["Title"] = "Crear Slider";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="text-center mt-4 mb-3">
+        <h1 class="fw-bold">Nuevo Slider</h1>
+    </div>
+
+    <form asp-action="Add" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="row">
+            <div class="col-12 col-lg-10 offset-lg-1 bg-white shadow p-3 rounded">
+                <div class="">
+                    <label asp-for="Nombre" class="form-label text-uppercase fw-bold text-muted"></label>
+                    <input asp-for="Nombre" type="text" class="form-control rounded" placeholder="Nombre de Slider" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="mb-2">
+                    <label asp-for="Estado" class="form-label text-uppercase fw-bold text-muted"></label>
+                    <select asp-for="Estado" class="form-select">
+                        <option disabled selected>Seleccione</option>
+                        <option value="true">Activo</option>
+                        <option value="false">Inactivo</option>
+                    </select>
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+                <div class="mb-2">
+                    <label asp-for="ImagenUrl" class="form-label"></label>
+                    <input type="file" name="files" id="files" class="form-control" asp-for="ImagenUrl" />
+                    <span asp-validation-for="ImagenUrl"></span>
+                </div>
+
+                <div>
+                    <button onclick="return validarImagen()" type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+                    <a asp-action="Index" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Regresar</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"></partial>
+
+    <script>
+        function validarImagen() {
+            if (document.getElementById('files').value == '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Seleccione una Imagen!'
+                });
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+}
+
+

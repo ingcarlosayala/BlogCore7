@@ -1,0 +1,33 @@
+﻿@model BlogCore.Models.ViewModels.ProductoVM
+@{
+    ViewData["Title"] = "Detalles de Producto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-12 col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-6">
+                            <h5 class="text-muted">@Model.Producto.Nombre</h5>
+                        </div>
+                        <div class="col-6 text-end">
+                            <h5 class="text-muted">@Model.Producto.FechaCreacion</h5>
+                        </div>
+                    </div>
+                </div>
+                <img src="@Model.Producto.ImagenUrl" class="w-100 card-img-top" />
+                <div class="card-body">
+                    <div class="card-title">
+                        <h5>Producto: <span class="text-muted ">@Model.Producto.Nombre</span></h5>
+                        <h6>Descripcion: <span class="text-muted d-inline-block">@Html.Raw(Model.Producto.Descripcion)</span></h6>
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary w-25">Regresar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,64 @@
+﻿@model BlogCore.Models.ViewModels.ProductoVM
+@{
+    ViewData["Title"] = "Actualizar Productos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="text-center mt-4 mb-3">
+        <h1 class="fw-bold">Actualizar Productos</h1>
+    </div>
+
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input type="hidden" asp-for="Producto.Id" />
+        <div class="row">
+            <div class="col-12 col-md-8 bg-white shadow p-3 rounded">
+                <div class="mb-2">
+                    <label asp-for="Producto.Nombre" class="form-label text-uppercase fw-bold text-muted"></label>
+                    <input asp-for="Producto.Nombre" type="text" class="form-control rounded" placeholder="Nombre del producto" />
+                    <span asp-validation-for="Producto.Nombre" class="text-danger"></span>
+                </div>
+                <div class="mb-2">
+                    <label asp-for="Producto.Categoria.Nombre" class="form-label text-uppercase fw-bold text-muted"></label>
+                    @Html.DropDownListFor(c => c.Producto.IdCategoria,Model.ListaCategoria,"Seleccione", new {@class = "form-control"})
+                    <span asp-validation-for="Producto.IdCategoria" class="text-danger"></span>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label text-uppercase fw-bold text-muted">Imagen</label>
+                    <input type="file" name="files" id="files" class="form-control rounded" asp-for="Producto.ImagenUrl" />
+                    <span asp-validation-for="Producto.ImagenUrl"></span>
+                </div>
+                <div class="mb-2">
+                    <label asp-for="Producto.Descripcion" class="form-label text-uppercase fw-bold text-muted"></label>
+                    <textarea asp-for="Producto.Descripcion" class="summernote form-control"></textarea>
+                    <span asp-validation-for="Producto.Descripcion" class="text-danger"></span>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Actualizar</button>
+                    <a asp-action="Index" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Regresar</a>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <img src="@Model.Producto.ImagenUrl" class="w-100" />
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $(".summernote").summernote({
+                height: 100,
+                placeholder: 'Descripcion del producto'
+            });
+        })
+    </script>
+
+    <partial name="_ValidationScriptsPartial"></partial>
+}
+
+
+

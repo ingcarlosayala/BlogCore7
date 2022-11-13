@@ -1,0 +1,51 @@
+﻿@model BlogCore.Models.ViewModels.HomeVM
+
+@{
+    ViewData["Title"] = "Slider";
+}
+
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        @{
+            int coun = 0;
+        }
+
+        @foreach (var slider in Model.ListaSlider)
+        {
+            var itemDinamico = coun++ == 0 ? "active item" : "item";
+
+            if (slider.Estado)
+            {
+                <div class="carousel-item @itemDinamico">
+                    <img src="@slider.ImagenUrl" class="d-block w-100 slider" alt="Imagenes">
+                </div>
+            }
+        }
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!--Productos-->
+<div class="container">
+    <div class="row mt-4">
+        @foreach (var item in Model.ListaProducto)
+        {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-2">
+                <div class="card rounded shadow">
+                    <img src="@item.ImagenUrl" class="w-100 card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4 text-center">@item.Nombre</h5>
+                        <a  asp-action="Detail" asp-route-id="@item.Id"  class="btn btn-primary w-100">Mas Informacion</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
